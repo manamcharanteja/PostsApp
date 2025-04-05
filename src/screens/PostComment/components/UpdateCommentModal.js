@@ -116,10 +116,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     borderRadius: 25,
     marginRight: 10,
-    paddingHorizontal: 24,
+    paddingHorizontal: 40,
   },
   submitButton: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 40,
     backgroundColor: Colors.primary,
     borderRadius: 25,
   },
