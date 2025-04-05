@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Text, Button } from "@rneui/themed";
 import { Colors } from "../../../theme/colors";
+import DashLine from "../../../components/DashLine";
 
 const UpdateCommentModal = ({ visible, onClose, postComment }) => {
   const { body: comment } = postComment || {};
@@ -22,11 +23,17 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
     },
   });
 
+  const handleClose = () => {
+    formik.resetForm();
+    onClose();
+  };
+
   return (
     <Modal transparent={true} visible={visible} animationType="fade">
       <View style={styles.container}>
         <View style={styles.popupContainer}>
           <Text style={styles.title}>Update Comment</Text>
+
           <TextInput
             style={styles.textInput}
             multiline
@@ -39,13 +46,12 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
           {formik.touched.comment && formik.errors.comment && (
             <Text style={styles.errorText}>{formik.errors.comment}</Text>
           )}
-
           <View style={styles.buttonContainer}>
             <Button
               buttonStyle={styles.cancelButton}
               title="Cancel"
               titleStyle={[styles.buttonTitle, { color: Colors.primary }]}
-              onPress={onClose}
+              onPress={handleClose}
             />
             <Button
               buttonStyle={styles.submitButton}
@@ -79,11 +85,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 100,
-    borderColor: "gray",
+    borderColor: Colors.gray200,
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 12,
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 8,
   },
   errorText: {
     color: "red",
