@@ -4,10 +4,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Text, Button } from "@rneui/themed";
 import { Colors } from "../../../theme/colors";
-import DashLine from "../../../components/DashLine";
+import { useUpdatePostCommentMutation } from "../../../services/account.api";
+import CanShow from "../../../components/CanShow";
 
 const UpdateCommentModal = ({ visible, onClose, postComment }) => {
-  const { body: comment } = postComment || {};
+  const { id: commentId, body: comment } = postComment || {};
+  const [updatePostComment, { isLoading, error }] =
+    useUpdatePostCommentMutation();
+
   const validationSchema = Yup.object().shape({
     comment: Yup.string()
       .required("Comment is required")
@@ -17,9 +21,14 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
   const formik = useFormik({
     initialValues: { comment: comment || "" },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Submitted Comment:", values.comment);
-      onClose();
+    onSubmit: async (values) => {
+      try {
+        await updatePostComment({ commentId, body: values.comment }).unwrap();
+        console.log("Submitted Comment:", values.comment);
+        onClose();
+      } catch (err) {
+        console.error("Failed to update comment: ", err);
+      }
     },
   });
 
@@ -33,19 +42,20 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
       <View style={styles.container}>
         <View style={styles.popupContainer}>
           <Text style={styles.title}>Update Comment</Text>
-
           <TextInput
             style={styles.textInput}
             multiline
-            numberOfLines={4}
             placeholder="Enter your comment"
             onChangeText={formik.handleChange("comment")}
             onBlur={formik.handleBlur("comment")}
             value={formik.values.comment}
           />
-          {formik.touched.comment && formik.errors.comment && (
+          <CanShow show={formik.touched.comment && formik.errors.comment}>
             <Text style={styles.errorText}>{formik.errors.comment}</Text>
-          )}
+          </CanShow>
+          <CanShow show={error}>
+            <Text style={styles.errorText}>Failed to update comment.</Text>
+          </CanShow>
           <View style={styles.buttonContainer}>
             <Button
               buttonStyle={styles.cancelButton}
@@ -58,6 +68,7 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
               title="Submit"
               titleStyle={styles.buttonTitle}
               onPress={formik.handleSubmit}
+              loading={isLoading}
             />
           </View>
         </View>
@@ -84,7 +95,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textInput: {
-    height: 100,
     borderColor: Colors.gray200,
     borderWidth: 1,
     marginBottom: 12,

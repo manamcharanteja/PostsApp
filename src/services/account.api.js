@@ -17,10 +17,10 @@ export const accountApi = backendApi.injectEndpoints({
       }),
     }),
     updatePostComment: builder.mutation({
-      query: (params) => ({
-        url: API_ENDPOINTS.COMMENT_POST,
+      query: ({ commentId, body }) => ({
+        url: `${API_ENDPOINTS.COMMENT_POST}${commentId}`,
         method: "PUT",
-        params,
+        body,
       }),
     }),
   }),
