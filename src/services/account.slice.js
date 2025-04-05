@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { accountApi } from './account.api';
+import { createSlice } from "@reduxjs/toolkit";
+import { accountApi } from "./account.api";
 
 export const accountSlice = createSlice({
-  name: 'account',
+  name: "account",
   initialState: {
     storeDetails: null,
   },
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addMatcher(
-      accountApi.endpoints.getStoreDetails.matchFulfilled,
+      accountApi.endpoints.getPosts.matchFulfilled,
       (state, { payload }) => {
         state.storeDetails = payload;
-      },
+      }
     );
   },
 });

@@ -10,15 +10,10 @@ const HeaderView = ({
   onLeftIconPress,
   onRightIconPress,
   middleTextStyle,
-  onLeftLongPress,
 }) => {
   return (
     <View style={[styles.container, containerStyle]}>
-      <TouchableOpacity
-        style={styles.leftContent}
-        onPress={onLeftIconPress}
-        onLongPress={onLeftLongPress}
-      >
+      <TouchableOpacity style={styles.leftContent} onPress={onLeftIconPress}>
         {leftContent}
       </TouchableOpacity>
       <View style={styles.middleContent}>
@@ -37,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primary,
     padding: 16,
   },
   leftContent: {
@@ -51,8 +46,8 @@ const styles = StyleSheet.create({
   },
   middleText: {
     fontSize: 16,
-    // fontFamily: "poppins-bold",
-    color: Colors.black,
+    fontWeight: "500",
+    color: Colors.white,
   },
   rightContent: {
     flex: 1,

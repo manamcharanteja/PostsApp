@@ -1,7 +1,8 @@
-import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
+import * as React from "react";
+import Svg, { Path } from "react-native-svg";
+import { Colors } from "../../../theme/colors";
 
-function ArrowIcon({ size = 24, color = '#667085', ...props }) {
+function ArrowIcon({ size = 24, color = Colors.white, ...props }) {
   return (
     <Svg
       width={size}
@@ -9,7 +10,8 @@ function ArrowIcon({ size = 24, color = '#667085', ...props }) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}>
+      {...props}
+    >
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
