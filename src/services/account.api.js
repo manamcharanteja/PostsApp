@@ -10,9 +10,9 @@ export const accountApi = backendApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    viewPost: builder.query({
-      query: () => ({
-        url: API_ENDPOINTS.VIEW_POST,
+    viewPostComments: builder.query({
+      query: ({ postId }) => ({
+        url: `${API_ENDPOINTS.VIEW_POST}${postId}/comments`,
         method: "GET",
       }),
     }),
@@ -28,6 +28,6 @@ export const accountApi = backendApi.injectEndpoints({
 
 export const {
   useGetPostsQuery,
-  useViewPostQuery,
+  useViewPostCommentsQuery,
   useUpdatePostCommentMutation,
 } = accountApi;

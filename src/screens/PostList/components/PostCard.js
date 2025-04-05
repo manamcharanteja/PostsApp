@@ -1,15 +1,23 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Colors } from "../../../theme/colors";
+import { useNavigation } from "@react-navigation/native";
+import SCREENS from "../../../constants/screens.const";
 
 const PostCard = ({ postDetails }) => {
+  const { navigate } = useNavigation();
+  const { title, body } = postDetails || {};
   return (
-    <TouchableOpacity style={styles.card} activeOpacity={0.6}>
+    <TouchableOpacity
+      style={styles.card}
+      activeOpacity={0.6}
+      onPress={() => navigate(SCREENS.POST_COMMENT, { postDetails })}
+    >
       <Text style={styles.title} numberOfLines={1}>
-        {postDetails?.title}
+        {title}
       </Text>
       <Text style={styles.body} numberOfLines={2}>
-        {postDetails?.body}
+        {body}
       </Text>
     </TouchableOpacity>
   );
