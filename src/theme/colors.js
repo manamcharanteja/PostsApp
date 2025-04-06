@@ -24,4 +24,5 @@ export const Colors = {
   error500: "#F04438",
   error600: "#D92D20",
   error50: "#FEF3F2",
+  red500: "#B42318",
 };

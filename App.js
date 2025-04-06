@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import Toast, { ToastProvider } from "react-native-toast-notifications";
@@ -15,12 +15,10 @@ const App = () => {
         transitionDuration={100}
         duration={2000}
       >
-        {/* <ThemeProvider theme={Theme}> */}
         <Provider store={store}>
           <InternetStatusBar />
           <AppNavigator />
         </Provider>
-        {/* </ThemeProvider> */}
       </ToastProvider>
       <Toast placement="top" ref={(ref) => (global.toast = ref)} />
     </SafeAreaProvider>
