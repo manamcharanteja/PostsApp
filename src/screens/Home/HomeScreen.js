@@ -13,12 +13,12 @@ import SCREENS from "../../constants/screens.const";
 import { useToast } from "react-native-toast-notifications";
 import Spacing from "../../components/Spacing";
 import CanShow from "../../components/CanShow";
+import PostCardShimmer from "../PostList/components/PostCardShimmer";
 
 const HomeScreen = ({ navigation }) => {
   const toast = useToast();
   const { data: posts = [], isLoading, error } = useGetPostsQuery();
 
-  if (isLoading) return <Loader />;
   if (error) return toast.show("Something went wrong", { type: "danger" });
 
   return (
@@ -41,6 +41,9 @@ const HomeScreen = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={<DashLine />}
           />
+        </CanShow>
+        <CanShow show={isLoading}>
+          <PostCardShimmer />
         </CanShow>
       </View>
     </SafeAreaView>

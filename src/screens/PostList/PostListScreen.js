@@ -9,11 +9,18 @@ import Loader from "../../components/Loader";
 import PostCard from "./components/PostCard";
 import { useToast } from "react-native-toast-notifications";
 import CanShow from "../../components/CanShow";
+import PostCardShimmer from "./components/PostCardShimmer";
 
 const PostListScreen = ({ navigation }) => {
   const toast = useToast();
   const [postsToShow, setPostsToShow] = useState(20);
-  const { data: posts = [], isLoading, error } = useGetPostsQuery();
+  const {
+    data: posts = [],
+    isLoading,
+    error,
+  } = useGetPostsQuery({
+    refetchOnFocus: true,
+  });
 
   const loadMorePosts = () => {
     if (posts?.length > postsToShow) {
@@ -21,7 +28,6 @@ const PostListScreen = ({ navigation }) => {
     }
   };
 
-  if (isLoading) return <Loader />;
   if (error) return toast.show("Something went wrong", { type: "danger" });
 
   return (
@@ -42,6 +48,9 @@ const PostListScreen = ({ navigation }) => {
             onEndReached={loadMorePosts}
             onEndReachedThreshold={0.1}
           />
+        </CanShow>
+        <CanShow show={isLoading}>
+          <PostCardShimmer />
         </CanShow>
       </View>
     </SafeAreaView>

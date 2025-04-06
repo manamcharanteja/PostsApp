@@ -5,10 +5,10 @@ import { Colors } from "../../theme/colors";
 import HeaderView from "../../components/HeaderView";
 import ArrowIcon from "../../assets/images/svg/ArrowIcon";
 import { useViewPostCommentsQuery } from "../../services/account.api";
-import Loader from "../../components/Loader";
 import { useToast } from "react-native-toast-notifications";
 import CommentsCard from "./components/CommentsCard";
 import CanShow from "../../components/CanShow";
+import CommentsCardShimmer from "./components/CommentsCardShimmer";
 
 const PostCommentScreen = ({ navigation, route }) => {
   const { postDetails } = route.params || {};
@@ -22,7 +22,6 @@ const PostCommentScreen = ({ navigation, route }) => {
   });
   console.log(postComments, "postComments");
 
-  if (isLoading) return <Loader />;
   if (error) return toast.show("Something went wrong", { type: "danger" });
 
   return (
@@ -41,6 +40,9 @@ const PostCommentScreen = ({ navigation, route }) => {
             renderItem={({ item }) => <CommentsCard postComment={item} />}
             showsVerticalScrollIndicator={false}
           />
+        </CanShow>
+        <CanShow show={isLoading}>
+          <CommentsCardShimmer />
         </CanShow>
       </View>
     </SafeAreaView>
