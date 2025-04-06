@@ -23,7 +23,9 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <StatusBar backgroundColor={Colors.white} barStyle="light-content" />
-      <HeaderView leftContent={<Text>Welcome</Text>} />
+      <HeaderView
+        middleText={<Text style={styles.headerTitle}>Posts Feed</Text>}
+      />
       <View style={styles.scrollView}>
         <Spacing size={16} />
         <HeaderWithAction
@@ -56,13 +58,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   headerTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
-    color: Colors.gray700,
-  },
-  headerAddress: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: Colors.gray500,
+    color: Colors.white,
   },
 });
