@@ -8,6 +8,7 @@ import { useViewPostCommentsQuery } from "../../services/account.api";
 import Loader from "../../components/Loader";
 import { useToast } from "react-native-toast-notifications";
 import CommentsCard from "./components/CommentsCard";
+import CanShow from "../../components/CanShow";
 
 const PostCommentScreen = ({ navigation, route }) => {
   const { postDetails } = route.params || {};
@@ -33,18 +34,20 @@ const PostCommentScreen = ({ navigation, route }) => {
         onLeftIconPress={() => navigation.goBack()}
       />
       <View style={styles.scrollView}>
-        <FlatList
-          data={postComments}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <CommentsCard postComment={item} />}
-          showsVerticalScrollIndicator={false}
-        />
+        <CanShow show={postComments && postComments?.length !== 0}>
+          <FlatList
+            data={postComments}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <CommentsCard postComment={item} />}
+            showsVerticalScrollIndicator={false}
+          />
+        </CanShow>
       </View>
     </SafeAreaView>
   );
 };
 
-export default PostCommentScreen;
+export default React.memo(PostCommentScreen);
 
 const styles = StyleSheet.create({
   safeAreaView: {

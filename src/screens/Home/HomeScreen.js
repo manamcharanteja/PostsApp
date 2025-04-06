@@ -12,6 +12,7 @@ import DashLine from "../../components/DashLine";
 import SCREENS from "../../constants/screens.const";
 import { useToast } from "react-native-toast-notifications";
 import Spacing from "../../components/Spacing";
+import CanShow from "../../components/CanShow";
 
 const HomeScreen = ({ navigation }) => {
   const toast = useToast();
@@ -32,19 +33,21 @@ const HomeScreen = ({ navigation }) => {
           title="Latest Posts"
           onViewBtnPress={() => navigation.navigate(SCREENS.POST_LIST)}
         />
-        <FlatList
-          data={posts.slice(0, 4)}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <PostCard postDetails={item} />}
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={<DashLine />}
-        />
+        <CanShow show={posts && posts?.length !== 0}>
+          <FlatList
+            data={posts?.slice(0, 4)}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <PostCard postDetails={item} />}
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={<DashLine />}
+          />
+        </CanShow>
       </View>
     </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+export default React.memo(HomeScreen);
 
 const styles = StyleSheet.create({
   safeAreaView: {

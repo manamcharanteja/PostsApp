@@ -8,6 +8,7 @@ import { useGetPostsQuery } from "../../services/account.api";
 import Loader from "../../components/Loader";
 import PostCard from "./components/PostCard";
 import { useToast } from "react-native-toast-notifications";
+import CanShow from "../../components/CanShow";
 
 const PostListScreen = ({ navigation }) => {
   const toast = useToast();
@@ -32,20 +33,22 @@ const PostListScreen = ({ navigation }) => {
         onLeftIconPress={() => navigation.goBack()}
       />
       <View style={styles.scrollView}>
-        <FlatList
-          data={posts?.slice(0, postsToShow)}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <PostCard postDetails={item} />}
-          showsVerticalScrollIndicator={false}
-          onEndReached={loadMorePosts}
-          onEndReachedThreshold={0.1}
-        />
+        <CanShow show={posts && posts?.length !== 0}>
+          <FlatList
+            data={posts?.slice(0, postsToShow)}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <PostCard postDetails={item} />}
+            showsVerticalScrollIndicator={false}
+            onEndReached={loadMorePosts}
+            onEndReachedThreshold={0.1}
+          />
+        </CanShow>
       </View>
     </SafeAreaView>
   );
 };
 
-export default PostListScreen;
+export default React.memo(PostListScreen);
 
 const styles = StyleSheet.create({
   safeAreaView: {

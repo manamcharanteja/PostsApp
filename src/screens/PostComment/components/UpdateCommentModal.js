@@ -2,13 +2,15 @@ import React from "react";
 import { Modal, View, StyleSheet, TextInput } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Text, Button } from "@rneui/themed";
+import { Text, Button, Divider } from "@rneui/themed";
 import { Colors } from "../../../theme/colors";
 import { useUpdatePostCommentMutation } from "../../../services/account.api";
 import CanShow from "../../../components/CanShow";
+import DashLine from "../../../components/DashLine";
+import Spacing from "../../../components/Spacing";
 
 const UpdateCommentModal = ({ visible, onClose, postComment }) => {
-  const { id: commentId, body: comment } = postComment || {};
+  const { id: commentId, name, body: comment } = postComment || {};
   const [updatePostComment, { isLoading, error }] =
     useUpdatePostCommentMutation();
 
@@ -41,7 +43,11 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
     <Modal transparent={true} visible={visible} animationType="fade">
       <View style={styles.container}>
         <View style={styles.popupContainer}>
+          <Text style={styles.postName}>{name}</Text>
+          <Divider color={Colors.gray300} width={1} />
+          <Spacing size={12} />
           <Text style={styles.title}>Update Comment</Text>
+          <Spacing size={12} />
           <TextInput
             style={styles.textInput}
             multiline
@@ -56,6 +62,9 @@ const UpdateCommentModal = ({ visible, onClose, postComment }) => {
           <CanShow show={error}>
             <Text style={styles.errorText}>Failed to update comment.</Text>
           </CanShow>
+          <Spacing size={6} />
+          <Divider color={Colors.gray300} width={1} />
+          <Spacing size={12} />
           <View style={styles.buttonContainer}>
             <Button
               buttonStyle={styles.cancelButton}
@@ -89,10 +98,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     padding: 24,
   },
-  title: {
-    fontSize: 20,
+  postName: {
+    fontSize: 16,
     fontWeight: "bold",
     marginBottom: 10,
+    color: Colors.primary,
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: "bold",
   },
   textInput: {
     borderColor: Colors.gray200,
