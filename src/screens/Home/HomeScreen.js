@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "../../theme/colors";
 import HeaderView from "../../components/HeaderView";
 import { useGetPostsQuery } from "../../services/account.api";
-import Loader from "../../components/Loader";
 import PostCard from "../PostList/components/PostCard";
 import HeaderWithAction from "../../components/HeaderWithAction";
 import DashLine from "../../components/DashLine";

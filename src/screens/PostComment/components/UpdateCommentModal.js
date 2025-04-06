@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpdateCommentModal;
+export default React.memo(UpdateCommentModal);

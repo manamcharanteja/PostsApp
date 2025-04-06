@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PostCard;
+export default React.memo(PostCard);

@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CommentsCard;
+export default React.memo(CommentsCard);
