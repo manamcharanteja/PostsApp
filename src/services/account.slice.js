@@ -4,14 +4,14 @@ import { accountApi } from "./account.api";
 export const accountSlice = createSlice({
   name: "account",
   initialState: {
-    storeDetails: null,
+    postDetails: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
       accountApi.endpoints.getPosts.matchFulfilled,
       (state, { payload }) => {
-        state.storeDetails = payload;
+        state.postDetails = payload;
       }
     );
   },
