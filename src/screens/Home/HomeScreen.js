@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
         <CanShow show={posts && posts?.length !== 0}>
           <FlatList
             data={posts?.slice(0, 4)}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item?.id?.toString()}
             renderItem={({ item }) => <PostCard postDetails={item} />}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={<DashLine />}

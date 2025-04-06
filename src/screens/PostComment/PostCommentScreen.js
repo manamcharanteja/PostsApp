@@ -36,7 +36,7 @@ const PostCommentScreen = ({ navigation, route }) => {
         <CanShow show={postComments && postComments?.length !== 0}>
           <FlatList
             data={postComments}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item?.id?.toString()}
             renderItem={({ item }) => <CommentsCard postComment={item} />}
             showsVerticalScrollIndicator={false}
           />
