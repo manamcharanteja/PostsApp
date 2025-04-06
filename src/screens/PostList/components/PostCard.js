@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Colors } from "../../../theme/colors";
 import { useNavigation } from "@react-navigation/native";
 import SCREENS from "../../../constants/screens.const";
@@ -7,19 +7,29 @@ import SCREENS from "../../../constants/screens.const";
 const PostCard = ({ postDetails }) => {
   const { navigate } = useNavigation();
   const { title, body } = postDetails || {};
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.card}
-      activeOpacity={0.6}
-      onPress={() => navigate(SCREENS.POST_COMMENT, { postDetails })}
-    >
-      <Text style={styles.title} numberOfLines={1}>
-        {title}
-      </Text>
-      <Text style={styles.body} numberOfLines={2}>
-        {body}
-      </Text>
-    </TouchableOpacity>
+    <View style={styles.card}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => navigate(SCREENS.POST_COMMENT, { postDetails })}
+      >
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.body} numberOfLines={isExpanded ? 0 : 2}>
+          {body}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={toggleExpand} style={styles.viewMoreButton}>
+        <Text style={styles.viewMoreText}>
+          {isExpanded ? "View Less" : "View More"}
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -45,6 +55,14 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 16,
     color: Colors.gray500,
+  },
+  viewMoreButton: {
+    marginTop: 8,
+    alignSelf: "flex-end",
+  },
+  viewMoreText: {
+    color: Colors.primary,
+    fontWeight: "bold",
   },
 });
 

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "600",
     color: Colors.gray900,
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   actionText: {
     color: Colors.primary,
     marginRight: 4,
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "600",
   },
 });
