@@ -6,7 +6,6 @@ import CommentIcon from "../../../assets/images/svg/CommentIcon";
 import { Colors } from "../../../theme/colors";
 import { Button } from "@rneui/themed";
 import EditIcon from "../../../assets/images/svg/EditIcon";
-import DashLine from "../../../components/DashLine";
 import Spacing from "../../../components/Spacing";
 import UpdateCommentModal from "./UpdateCommentModal";
 
