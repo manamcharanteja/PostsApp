@@ -1,4 +1,5 @@
 const SCREENS = {
+  DASHBOARD: "Dashboard",
   HOME: "Home",
   POST_LIST: "PostList",
   POST_COMMENT: "PostComment",
