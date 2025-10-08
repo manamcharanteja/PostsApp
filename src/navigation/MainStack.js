@@ -4,6 +4,7 @@ import SCREENS from "../constants/screens.const";
 import Loader from "../components/Loader";
 
 // Lazy load the screens
+const DashboardScreen = lazy(() => import("../screens/Dashboard/DashboardScreen"));
 const HomeScreen = lazy(() => import("../screens/Home/HomeScreen"));
 const PostListScreen = lazy(() => import("../screens/PostList/PostListScreen"));
 const PostCommentScreen = lazy(() => import("../screens/PostComment/PostCommentScreen"));
@@ -15,6 +16,7 @@ const MainStack = () => {
     <Suspense fallback={<Loader />}> 
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={SCREENS.HOME} component={HomeScreen} />
+        <Stack.Screen name={SCREENS.DASHBOARD} component={DashboardScreen} />
         <Stack.Screen name={SCREENS.POST_LIST} component={PostListScreen} />
         <Stack.Screen name={SCREENS.POST_COMMENT} component={PostCommentScreen} />
       </Stack.Navigator>
